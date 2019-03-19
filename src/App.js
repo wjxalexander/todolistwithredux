@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
 import {Input,Button,List} from 'antd'
-const data = [
-  'Racing car sprays burning fuel into crowd.',
-  'Japanese princess to wed commoner.',
-  'Australian walks 100km after outback crash.',
-  'Man charged over missing wedding girl.',
-  'Los Angeles battles huge wildfires.',
-];
+import store from "./store"
+
 class App extends Component {
+  constructor(props){
+     super(props)
+     this.state = store.getState()
+  }
   render() {
+    const {list,inputVal} = this.state
     return (
       <div className="App" style={{width: "50%", marginLeft: "20px"}}>
-       <Input style={{width:"300px"}} />
+       <Input style={{width:"300px"}} value={inputVal}/>
        <Button type="primary">add a todolist</Button>
        <List
         size="large"
         header={<div>Header</div>}
         footer={<div>Footer</div>}
         bordered
-        dataSource={data}
+        dataSource={list}
         renderItem={item => (<List.Item>{item}</List.Item>)}
     />
       </div>
